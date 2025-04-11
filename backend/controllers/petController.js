@@ -6,7 +6,7 @@ export const createPet = async (req, res) => {
     try {
         const { animalName, type, image, age, status, description } = req.body;
 
-        const author = req.user.id; // or req.userId depending on your middleware
+        const author = req.user.id;
         const newPet = new Pet({ animalName, type, image, age, status, description, author });
         await newPet.save();
         res.status(201).json(newPet);
@@ -16,6 +16,19 @@ export const createPet = async (req, res) => {
     }
 };
 
+// Get Single Pet by ID
+export const getPetById = async (req, res) => {
+    try {
+        const pet = await Pet.findById(req.params.id).populate('author', 'firstName lastName email')
+
+        if (!pet) {
+            return res.status(404).json({ message: 'Pet not found' });
+        }
+        res.status(200).json(pet);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
 // Get All Posts
 export const getAllPets = async (req, res) => {

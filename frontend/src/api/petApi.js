@@ -20,3 +20,9 @@ export const getPets = async () => {
     const response = await axios.get(API_URL);
     return response.data;
 };
+
+export const getPetById = async (id) => {
+    const res = await fetch(`http://localhost:5000/api/pets/${id}`);
+    const data = await res.json();
+    return data;
+};

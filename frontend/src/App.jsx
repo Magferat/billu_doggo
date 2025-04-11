@@ -9,6 +9,7 @@ import Profile from './pages/UserProfile';
 import Admin from './pages/AdminDashboard';
 import Navbar from './components/Navbar';
 import PetList from "./pages/PetList";
+import PetDetails from './pages/PetDetails';
 import CreatePet from './pages/CreatePet'; // 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/create-pet" element={<CreatePet />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/pets/:id" element={<PetDetails />} />
 
         {/* Protected Routes */}
         <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
